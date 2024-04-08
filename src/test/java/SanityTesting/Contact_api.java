@@ -12,32 +12,25 @@ import java.util.Map;
 
 public class Contact_api {
 	
-	 @Test
-	    public void testGetRegionDataAPI() {
-		 Map<String, String> formParams = new HashMap<>();
-	        formParams.put("fname", ""); // Add your parameters here
-	        formParams.put("email", "");
-	        formParams.put("phone", "");
-	        formParams.put("mge", "");
-
-	        // Send the POST request with form URL-encoded parameters
-	        Response response = RestAssured
-	                .given()
-	                    .auth()
-	                    .preemptive()
-	                    .basic("admin", "admin") // replace with actual credentials in a secure way
-	                    .contentType(ContentType.URLENC)
-	                    .formParams(formParams) // Set the form parameters
-	                .when()
-	                    .post("https://apollo2.humanbrain.in/GW/contactSubmit");
-
-	        // Get the response status code
-	        int statusCode = response.getStatusCode();
-
-	        // Use Assert to validate the response status code
-	        Assert.assertEquals(statusCode, 200, "API request to get region data failed");
-
-	        // This line will only execute if the assertion above is successful
-	        System.out.println("API request to the GetRegion data passed. Status code: " + statusCode);
-	    }
+	@Test(priority=13)
+	 public void activity()
+	 {
+		 String jsonBody1 = "{\"Name\":{\"Name_First\":\"Software\",\"Name_Last\":\"team\"},\"Email\":\"softwareteam45@gmail.com\",\"PhoneNumber\":\"1234567890\",\"MultiLine\":\"for testing purpose\",\"REFERRER_NAME\":\"https://apollo2.humanbrain.in/\",\"ZS_IF_DOMAIN\":\"https://apollo2.humanbrain.in/\"}";
+    	 Response response1 = RestAssured
+             .given()
+                 .auth()
+                 .preemptive()
+                 .basic("admin", "admin")
+                 .contentType(ContentType.JSON)
+                 .body(jsonBody1)
+             .when()
+                 .post("https://forms.zohopublic.eu/SGBC/form/Contactus1/formperma/lGv8C1vgoHfvyA6CsgqzrgDDC3KHairV96zZkQsRAQE/records");
+    	 int statusCode1 = response1.getStatusCode();
+    	 if (statusCode1 == 200) {
+             System.out.println("API request to Contact form api passed. Status code: " + statusCode1);
+         } else {
+             System.out.println("API request to Contact form api failed. Status code: " + statusCode1);
+         }
+         Assert.assertEquals(statusCode1, 200, "API request to Contact form failed");  
+	 }
 }
